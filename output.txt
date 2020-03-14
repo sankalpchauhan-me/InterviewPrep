@@ -1,7 +1,16 @@
-swapped arr[1] and arr[2]
-swapped arr[3] and arr[4]
-swapped arr[5] and arr[6]
-1326487
-swapped arr[1] and arr[2]
-swapped arr[3] and arr[4]
-1320
+mindiff : 2147483647 |  i : 0 |  j : 0 |  vec[j] : 1
+mindiff : 8 |  i : 0 |  j : 1 |  vec[j] : 3
+mindiff : 8 |  i : 0 |  j : 2 |  vec[j] : 4
+mindiff : 8 |  i : 0 |  j : 3 |  vec[j] : 7
+mindiff : 8 |  i : 0 |  j : 4 |  vec[j] : 9
+mindiff : 8 |  i : 1 |  j : 1 |  vec[j] : 3
+mindiff : 6 |  i : 1 |  j : 2 |  vec[j] : 4
+mindiff : 6 |  i : 1 |  j : 3 |  vec[j] : 7
+mindiff : 6 |  i : 1 |  j : 4 |  vec[j] : 9
+mindiff : 6 |  i : 2 |  j : 2 |  vec[j] : 4
+mindiff : 5 |  i : 2 |  j : 3 |  vec[j] : 7
+mindiff : 5 |  i : 2 |  j : 4 |  vec[j] : 9
+mindiff : 5 |  i : 3 |  j : 3 |  vec[j] : 7
+mindiff : 2 |  i : 3 |  j : 4 |  vec[j] : 9
+mindiff : 2 |  i : 4 |  j : 4 |  vec[j] : 9
+0

@@ -63,22 +63,6 @@ void write(T...args){
     ((cout<<args<<" "), ...);
 }
 
-void zigzag(int *arr, int n){
-    bool flag=true;
-    for(int i=0; i<=n-2; i++){
-        if(flag){
-            if(arr[i]>arr[i+1]){
-                swap(arr[i], arr[i+1]);
-            }
-        }
-        else{
-            if(arr[i]<arr[i+1]){
-                swap(arr[i], arr[i+1]);
-            }
-        }
-        flag = !flag;
-    }
-}
 
 int main()
 {
@@ -88,25 +72,33 @@ int main()
     freopen("./../input.txt","r",stdin);
     freopen("./../output.txt","w",stdout);
     #endif
+
     testcases{
-	    int arr[101];
-	    int n;
-        cin>>n;
+        int n,m;
+        cin>>n>>m;
+        vector<int> vec;
         for(int i=0; i<=n-1; i++){
-            cin>>arr[i];
+            int val;
+            cin>>val;
+            vec.push_back(val);
         }
+
+        sort(vec.begin(), vec.end());
+        //1 3 4 7 9 9 12 56
+        int mindiff = INT_MAX;
+        for(int i=0; i<=n-1; i++){
+            for(int j=i; j<=m-1; j++){
+                trace(mindiff, i, j, vec[j]);
+                if(vec[m-1]-vec[i]<mindiff){
+                    mindiff = vec[m-1]-vec[i];
+                }
+            }
+        }
+
+        cout<<mindiff<<endl;
         
-        zigzag(arr, n);
-        for(int i=0; i<=n-1; i++){
-            cout<<arr[i]<<" ";
-        }
-
-        cout<<endl;
-
+        
     }
-
-    return 0;
-    
 }
 
 

@@ -1,3 +1,5 @@
+//https://www.geeksforgeeks.org/find-subarray-with-given-sum-in-array-of-integers/
+
 // ██████╗ ██████╗ ██████╗ ███████╗██████╗ ██╗   ██╗███╗   ██╗██╗  ██╗███╗   ██╗ ██████╗ ██╗    ██╗███╗   ██╗
 // ██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔══██╗██║   ██║████╗  ██║██║ ██╔╝████╗  ██║██╔═══██╗██║    ██║████╗  ██║
 // ██║     ██║   ██║██║  ██║█████╗  ██████╔╝██║   ██║██╔██╗ ██║█████╔╝ ██╔██╗ ██║██║   ██║██║ █╗ ██║██╔██╗ ██║
@@ -10,6 +12,7 @@
 #include<stack>
 #include<queue>
 #include<list>
+#include<tuple>
 #include<vector>
 #include<bitset>
 #include<unordered_map>
@@ -63,22 +66,58 @@ void write(T...args){
     ((cout<<args<<" "), ...);
 }
 
-void zigzag(int *arr, int n){
-    bool flag=true;
-    for(int i=0; i<=n-2; i++){
-        if(flag){
-            if(arr[i]>arr[i+1]){
-                swap(arr[i], arr[i+1]);
-            }
-        }
-        else{
-            if(arr[i]<arr[i+1]){
-                swap(arr[i], arr[i+1]);
-            }
-        }
-        flag = !flag;
+class reverseproxy{
+    string domain_name;
+    int machines;
+    vector<string> ips;
+    public:
+     reverseproxy(string domain_name, int machines, vector<string> ips){
+        this->domain_name = domain_name;
+        this->machines = machines;
+        this->ips = ips;
     }
+    string getname(){
+        return domain_name;
+    }
+    int getMachine(){
+        return machines;
+    }
+
+    vector<string> getips(){
+        return ips;
+    }
+
+};
+
+
+tuple<int,int,string> parsequery(string str, int n1){
+    size_t last = 0;
+    size_t next = 0;
+    int finalip;
+    bool status;
+    string status_ip;
+    while ((next = str.find('/', last)) != string::npos) 
+    {   string str2 = str.substr(last, next-last);
+        for(int i=1; i<=n1; i++){
+        if(str2.find("ww"+tostring(i))!=string::npos){
+            finalip=i;
+        }
+    }last = next + 1; 
+     } 
+     if(str.substr(last).find("machine_up") != string::npos) {
+         status=true;
+         while ((next = str.find('=', last)) != string::npos) 
+            {last = next + 1;} 
+        string status_ip =  str.substr(last);}
+     else if(str.substr(last).find("machine_down") != string::npos) {
+         status=false;
+         while ((next = str.find('=', last)) != string::npos) 
+            {last = next + 1;} 
+        string status_ip = str.substr(last);
+        }
+        return make_tuple(finalip, status, status_ip);
 }
+
 
 int main()
 {
@@ -88,25 +127,51 @@ int main()
     freopen("./../input.txt","r",stdin);
     freopen("./../output.txt","w",stdout);
     #endif
-    testcases{
-	    int arr[101];
-	    int n;
+
+    // testcases{
+        int n; //number of machines
         cin>>n;
+        vector<string> ips;
         for(int i=0; i<=n-1; i++){
-            cin>>arr[i];
+            string val;
+            cin>>val;
+            //trace(val,n);
+            ips.pb(val);
         }
-        
-        zigzag(arr, n);
-        for(int i=0; i<=n-1; i++){
-            cout<<arr[i]<<" ";
+        int r;
+        cin>>r;
+        vector<reverseproxy> rps;
+        for(int i=0; i<=r-1; i++){
+            string domain_name;
+            cin>>domain_name;
+            int n;
+            cin>>n;
+            vector<string> ips;
+            for(int j=0; j<=r-1; j++){
+                string val;
+                cin>>val;
+                ips.push_back(val);
+            }
+            trace(domain_name);
+            reverseproxy r (domain_name, n, ips);
+            rps.pb(r);
         }
+        int query;
+        cin>>query;
 
+        vector<string> queryvec;
+        for(int i=0; i<=query-1; i++){
+            string val;
+            cin>>val;
+            //trace(val);
+            tuple<int,int,string> t = parsequery(val,r);
+            cout<<get<0>(tuple);
+
+        }
         cout<<endl;
-
-    }
-
-    return 0;
+    //}
     
+
 }
 
 

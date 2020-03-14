@@ -63,21 +63,35 @@ void write(T...args){
     ((cout<<args<<" "), ...);
 }
 
-void zigzag(int *arr, int n){
-    bool flag=true;
-    for(int i=0; i<=n-2; i++){
-        if(flag){
-            if(arr[i]>arr[i+1]){
-                swap(arr[i], arr[i+1]);
-            }
-        }
-        else{
-            if(arr[i]<arr[i+1]){
-                swap(arr[i], arr[i+1]);
-            }
-        }
-        flag = !flag;
+map<int, int> makeMap(int n){
+    map<int,int> m;
+    for(int i=1; i<=n; i++){
+         m.insert(make_pair(i, i*(i+1)/2));
+         //trace(i, i*(i+1)/2);
     }
+    return m; 
+}
+
+int someRecurssiveFunc(int n, int m){
+    ll sumupton = n*(n+1)/2;
+    if((m-sumupton)<0){
+            return(-1*m-sumupton);
+        }
+    if((m-sumupton)==0){
+           return 0;
+        }
+         //m= m-sumupton;
+        // while(m>0){
+            
+        // }
+        map<int,int> map = makeMap(n);
+        while(m>map[n]){
+            m= m-map[n];
+            trace(m);
+        }
+        someRecurssiveFunc(n,m);
+       
+        
 }
 
 int main()
@@ -88,25 +102,15 @@ int main()
     freopen("./../input.txt","r",stdin);
     freopen("./../output.txt","w",stdout);
     #endif
+
     testcases{
-	    int arr[101];
-	    int n;
-        cin>>n;
-        for(int i=0; i<=n-1; i++){
-            cin>>arr[i];
-        }
+        int n,m;
+        cin>>n>>m;
+        //sum of integers upto n
+        cout<<someRecurssiveFunc(n,m);
         
-        zigzag(arr, n);
-        for(int i=0; i<=n-1; i++){
-            cout<<arr[i]<<" ";
-        }
-
-        cout<<endl;
-
+        
     }
-
-    return 0;
-    
 }
 
 

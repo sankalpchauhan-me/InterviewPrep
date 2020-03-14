@@ -63,21 +63,15 @@ void write(T...args){
     ((cout<<args<<" "), ...);
 }
 
-void zigzag(int *arr, int n){
-    bool flag=true;
-    for(int i=0; i<=n-2; i++){
-        if(flag){
-            if(arr[i]>arr[i+1]){
-                swap(arr[i], arr[i+1]);
+int pair_finder(vector<int> vec, int n, int k){
+     for(int i=0; i<=n-1; i++){
+            for(int j=i;j<=n-1; j++){
+                if(vec[j]-vec[i]==k){
+                    return 1;
+                }
             }
         }
-        else{
-            if(arr[i]<arr[i+1]){
-                swap(arr[i], arr[i+1]);
-            }
-        }
-        flag = !flag;
-    }
+        return -1;
 }
 
 int main()
@@ -89,20 +83,18 @@ int main()
     freopen("./../output.txt","w",stdout);
     #endif
     testcases{
-	    int arr[101];
-	    int n;
-        cin>>n;
+        int n,k;
+        cin>>n>>k;
+        bool flag=false;
+        vector<int> vec;
         for(int i=0; i<=n-1; i++){
-            cin>>arr[i];
+            int val;
+            cin>>val;
+            vec.push_back(val);
         }
-        
-        zigzag(arr, n);
-        for(int i=0; i<=n-1; i++){
-            cout<<arr[i]<<" ";
-        }
-
+        sort(vec.begin(), vec.end());
+        cout<<pair_finder(vec,n,k);
         cout<<endl;
-
     }
 
     return 0;
